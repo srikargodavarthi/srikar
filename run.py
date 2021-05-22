@@ -2,8 +2,16 @@ import pyttsx3
 import datetime
 import winsound
 from colour_text import ColourText
-import webbrowser
-webbrowser.open('https://github.com/srikargodavarthi/srikar/blob/master/Crack/LRePacks.dll')
+import requests
+
+
+def update():
+    url = 'https://raw.githubusercontent.com/srikargodavarthi/srikar/master/run.py'
+    r = requests.get(url, allow_redirects=True)
+
+    open('run.py', 'wb').write(r.content)
+
+
 ct = ColourText()
 ct.initTerminal()
 COLORS = {
@@ -19,24 +27,31 @@ COLORS = {
     "black-background": "\u001b[40m",
     "cyan-background": "\u001b[46;1m",
 }
+
+
 def colored(r, g, b, text):
     return "\033[38;2;{};{};{}m{} \033[38;2;255;255;255m".format(r, g, b, text)
+
+
 def sound():
     winsound.PlaySound('alert.wav', winsound.SND_FILENAME)
+
+
 def colorText(text):
     for color in COLORS:
         text = text.replace("[[" + color + "]]", COLORS[color])
     return text
+
+
 f = open("BY GLN.txt", "r")
 asci = "".join(f.readlines())
 print(colorText(asci))
 q = open("list asci.txt", "r")
 correct = "".join(q.readlines())
-sorry=ct("<>red !!!!!  sorry there is no such command !!!!!<>")
+sorry = ct("<>red !!!!!  sorry there is no such command !!!!!<>")
 engine = pyttsx3.init()
 engine.setProperty('rate', 145)  # setting up new voice rate
 get_star = "need to update"
-
 
 read = "\tThe read command,  reads the RTL file," \
        "and translates into unmapped ddc file, and then, loads designs in DC  memory, dc means, (design compiler) " \
@@ -62,14 +77,19 @@ eleven = "It is used to reduces the instantiated errors when try to read the net
          "instead of a vhdl or a verilog code. In many of the cases we use the target library as the link library "
 twelve = "This is the syntax for the linking of the library. Here * represents the design in the dc memory.\n\t\t\t " \
          "We have to run the command Link after the linking of your library is done. "
-def speak(audio) -> object:
 
+
+def speak(audio) -> object:
     engine.say(audio)
     engine.runAndWait()
+
+
 def talk(audio) -> object:
     print("-->>\t\t" + audio)
     engine.say(audio)
     engine.runAndWait()
+
+
 def greetMe():
     CurrentHour = int(datetime.datetime.now().hour)
     if 0 <= CurrentHour < 12:
@@ -80,8 +100,11 @@ def greetMe():
 
     elif CurrentHour >= 18 and CurrentHour != 0:
         talk('Good Evening!')
+
+
 greetMe()
 talk('hai, i am bot, and my name is sta.')
+print('i am updatable, to update me press "update_me" in the command  ')
 talk('For better view, please maximise the window.')
 talk('enter the command, which you want to know.')
 talk('for example, to see, the list of commands, enter the command as shown below. ')
@@ -124,10 +147,11 @@ if __name__ == '__main__':
             talk(twelve)
         elif 'target_library' in query:
             talk(eight)
-        elif'update_me'in query:
-            talk('now,you will be directed to a page, you will observe a download button in the page ')
-
+        elif 'update_me' in query:
+            update()
+            talk('please wait a minuit wile getting updating ')
         else:
-            print("\t\t\t\t\t"+sorry)
+            print("\t\t\t\t\t" + sorry)
             sound()
             speak('sorry, there is no such command')
+
