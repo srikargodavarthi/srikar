@@ -21,9 +21,11 @@ def update():
                     fi.write(data)
                     sys.stdout.flush()
         sys.stdout.write('\n')
-        download('https://raw.githubusercontent.com/srikargodavarthi/srikar/master/run.py', 'run.py')
-        download('https://raw.githubusercontent.com/srikargodavarthi/srikar/master/BY%20GLN.txt', 'BY GLN.TXT')
-        download('https://raw.githubusercontent.com/srikargodavarthi/srikar/master/list%20asci.txt', 'list asci.txt')
+
+    download('https://raw.githubusercontent.com/srikargodavarthi/srikar/master/run.py', 'run.py')
+    download('https://raw.githubusercontent.com/srikargodavarthi/srikar/master/BY%20GLN.txt', 'BY GLN.TXT')
+    download('https://raw.githubusercontent.com/srikargodavarthi/srikar/master/list%20asci.txt', 'list asci.txt')
+
 
 def check_update():
     op = 'https://raw.githubusercontent.com/srikargodavarthi/srikar/master/UPDATE'
@@ -99,10 +101,14 @@ read = "\tThe read command,  reads the RTL file," \
        "and user specified link libraries.\n\t\t\t\t Before giving read command make sure to adjust the current " \
        "directory and " \
        "topo. "
-second = " It loads, the constraints."
-third = "It lists, all the timing violations."
-fourth = " It checks, the timing variations, for different error conditions."
-fifth = "It converts the rtl code, and generate a net list, mapped with the specific libraries."
+second = " It loads, the constraints" \
+         "\t."
+third = "It lists, all the timing violations" \
+        "\t."
+fourth = " It checks, the timing variations, for different error conditions" \
+         "\t."
+fifth = "It converts the rtl code, and generate a net list, mapped with the specific libraries" \
+        "\t."
 six = "\tSame as the read_verilog command. It reads the VHDL file which we have,\n\t\t\t The vhdl design library is " \
       "called, work by default.\n\t\t\t The work files and directories are by default placed in current working " \
       "directry called as (cwd) "
@@ -165,6 +171,5 @@ if __name__ == '__main__':
             print("\t\t\t\t\t" + sorry)
             sound()
             speak('sorry, there is no such command')
-
 
 
