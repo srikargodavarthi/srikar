@@ -26,7 +26,7 @@ def update():
     download('https://raw.githubusercontent.com/srikargodavarthi/srikar/master/run.py', 'run.py')
     download('https://raw.githubusercontent.com/srikargodavarthi/srikar/master/BY%20GLN.txt', 'BY GLN.TXT')
     download('https://raw.githubusercontent.com/srikargodavarthi/srikar/master/list%20asci.txt', 'list asci.txt')
-    talk('i am, updated. please restart the application')
+    print('i am, updated. please restart the application')
 def check_update():
     op = 'https://raw.githubusercontent.com/srikargodavarthi/srikar/master/UPDATE'
     response = requests.get(op)
@@ -127,7 +127,6 @@ twelve = "This is the syntax for the linking of the library. Here * represents t
 
 greetMe()
 talk('hai, i am bot, and my name is sta.')
-print(ct("\t\t<>magenta to update me enter command  'update_me'<>\n"))
 talk('For better view, please maximise the window.')
 talk('enter the command, which you want to know.')
 talk('for example, to see, the list of commands, enter the command as shown below. ')
@@ -175,3 +174,4 @@ if __name__ == '__main__':
             print("\t\t\t\t\t" + sorry)
             sound()
             speak('sorry, there is no such command')
+
