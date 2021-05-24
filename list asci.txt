@@ -1,0 +1,19 @@
+[[green]]
+       get_*                                    set_app_var target_library libs/20nm_wc.db                     read_verilog rtl/filename_rtl.v    read_vhdl  
+
+
+              
+       source cons/filename.con                 repot_constraints -all violators                               check_timing                       compile_ultra
+
+
+
+       define_design_lib WORK -path ./work      target_library                                                 list                               link_library
+
+
+
+       link_library                             write_file -format verilog-  output\directory_name/file_name.v                 
+
+
+                
+       set_app_var link_library * $target_library                                                                                                       
+[[white]]
