@@ -4,6 +4,7 @@ import winsound
 from colour_text import ColourText
 import requests
 import sys
+
 def update():
     def download(url, filename):
         with open(filename, 'wb') as fi:
@@ -20,12 +21,9 @@ def update():
                     fi.write(data)
                     sys.stdout.flush()
         sys.stdout.write('\n')
-
-    download('https://raw.githubusercontent.com/srikargodavarthi/srikar/master/run.py', 'run.py')
-    download('https://raw.githubusercontent.com/srikargodavarthi/srikar/master/BY%20GLN.txt', 'BY GLN.TXT')
-    download('https://raw.githubusercontent.com/srikargodavarthi/srikar/master/list%20asci.txt', 'list asci.txt')
-
-
+        download('https://raw.githubusercontent.com/srikargodavarthi/srikar/master/run.py', 'run.py')
+        download('https://raw.githubusercontent.com/srikargodavarthi/srikar/master/BY%20GLN.txt', 'BY GLN.TXT')
+        download('https://raw.githubusercontent.com/srikargodavarthi/srikar/master/list%20asci.txt', 'list asci.txt')
 
 def check_update():
     op = 'https://raw.githubusercontent.com/srikargodavarthi/srikar/master/UPDATE'
@@ -60,10 +58,8 @@ def greetMe():
 def colored(r, g, b, text):
     return "\033[38;2;{};{};{}m{} \033[38;2;255;255;255m".format(r, g, b, text)
 
-
 def sound():
     winsound.PlaySound('alert.wav', winsound.SND_FILENAME)
-
 
 def colorText(text):
     for color in COLORS:
@@ -120,11 +116,6 @@ eleven = "It is used to reduces the instantiated errors when try to read the net
          "instead of a vhdl or a verilog code. In many of the cases we use the target library as the link library "
 twelve = "This is the syntax for the linking of the library. Here * represents the design in the dc memory.\n\t\t\t " \
          "We have to run the command Link after the linking of your library is done. "
-
-
-
-
-
 greetMe()
 talk('hai, i am bot, and my name is sta.')
 talk('For better view, please maximise the window.')
@@ -174,5 +165,6 @@ if __name__ == '__main__':
             print("\t\t\t\t\t" + sorry)
             sound()
             speak('sorry, there is no such command')
+
 
 
