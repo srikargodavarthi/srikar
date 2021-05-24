@@ -6,29 +6,27 @@ import requests
 import sys
 def update():
     def download(url, filename):
-    with open(filename, 'wb') as fi:
-        response = requests.get(url, stream=True)
-        total = response.headers.get('content-length')
+        with open(filename, 'wb') as fi:
+            response = requests.get(url, stream=True)
+            total = response.headers.get('content-length')
 
-        if total is None:
-            fi.write(response.content)
-        else:
-            downloaded = 0
-            total = int(total)
-            for data in response.iter_content(chunk_size=max(int(total / 10), 34 * 34)):
-                downloaded += len(data)
-                fi.write(data)
-                sys.stdout.flush()
-    sys.stdout.write('\n')
-download('https://raw.githubusercontent.com/srikargodavarthi/srikar/master/run.py', 'run.py')
-download('https://raw.githubusercontent.com/srikargodavarthi/srikar/master/BY%20GLN.txt', 'BY GLN.TXT')
-download('https://raw.githubusercontent.com/srikargodavarthi/srikar/master/list%20asci.txt', 'list asci.txt')
-
+            if total is None:
+                fi.write(response.content)
+            else:
+                downloaded = 0
+                total = int(total)
+                for data in response.iter_content(chunk_size=max(int(total / 10), 34 * 34)):
+                    downloaded += len(data)
+                    fi.write(data)
+                    sys.stdout.flush()
+        sys.stdout.write('\n')
 
     download('https://raw.githubusercontent.com/srikargodavarthi/srikar/master/run.py', 'run.py')
     download('https://raw.githubusercontent.com/srikargodavarthi/srikar/master/BY%20GLN.txt', 'BY GLN.TXT')
     download('https://raw.githubusercontent.com/srikargodavarthi/srikar/master/list%20asci.txt', 'list asci.txt')
-    print('i am, updated. please restart the application')
+
+
+
 def check_update():
     op = 'https://raw.githubusercontent.com/srikargodavarthi/srikar/master/UPDATE'
     response = requests.get(op)
@@ -176,4 +174,5 @@ if __name__ == '__main__':
             print("\t\t\t\t\t" + sorry)
             sound()
             speak('sorry, there is no such command')
+
 
