@@ -3,15 +3,73 @@ import datetime
 import winsound
 from colour_text import ColourText
 import requests
-
-
+import sys
 def update():
-    url = 'https://raw.githubusercontent.com/srikargodavarthi/srikar/master/run.py'
-    r = requests.get(url, allow_redirects=True)
+    def download(url, filename):
+        with open(filename, 'wb') as fi:
+            response = requests.get(url, stream=True)
+            total = response.headers.get('content-length')
 
-    open('run.py', 'wb').write(r.content)
+            if total is None:
+                fi.write(response.content)
+            else:
+                downloaded = 0
+                total = int(total)
+                for data in response.iter_content(chunk_size=max(int(total / 10), 34 * 34)):
+                    downloaded += len(data)
+                    fi.write(data)
+                    done = int(50 * downloaded / total)
+                    sys.stdout.write('\r|{}{}|'.format('█' * done, '.' * (50 - done)))
+                    sys.stdout.flush()
+        sys.stdout.write('\n')
+
+    download('https://raw.githubusercontent.com/srikargodavarthi/srikar/master/run.py', 'run.py')
+    download('https://raw.githubusercontent.com/srikargodavarthi/srikar/master/BY%20GLN.txt', 'BY GLN.TXT')
+    download('https://raw.githubusercontent.com/srikargodavarthi/srikar/master/list%20asci.txt', 'list asci.txt')
+    talk('i am, updated. please restart the application')
+def check_update():
+    op = 'https://raw.githubusercontent.com/srikargodavarthi/srikar/master/UPDATE'
+    response = requests.get(op)
+    response.decode = 'utf-8'
+    neup = response.text
+
+    if 'YES' in neup:
+        update()
+
+def speak(audio) -> object:
+    engine.say(audio)
+    engine.runAndWait()
+
+def talk(audio) -> object:
+    print("-->>\t\t" + audio)
+    print("\n")
+    engine.say(audio)
+    engine.runAndWait()
+
+def greetMe():
+    CurrentHour = int(datetime.datetime.now().hour)
+    if 0 <= CurrentHour < 12:
+        talk('Good Morning!')
+
+    elif 12 <= CurrentHour < 18:
+        talk('Good Afternoon!')
+
+    elif CurrentHour >= 18 and CurrentHour != 0:
+        talk('Good Evening!')
+
+def colored(r, g, b, text):
+    return "\033[38;2;{};{};{}m{} \033[38;2;255;255;255m".format(r, g, b, text)
 
 
+def sound():
+    winsound.PlaySound('alert.wav', winsound.SND_FILENAME)
+
+
+def colorText(text):
+    for color in COLORS:
+        text = text.replace("[[" + color + "]]", COLORS[color])
+    return text
+check_update()
 ct = ColourText()
 ct.initTerminal()
 COLORS = {
@@ -27,21 +85,6 @@ COLORS = {
     "black-background": "\u001b[40m",
     "cyan-background": "\u001b[46;1m",
 }
-
-
-def colored(r, g, b, text):
-    return "\033[38;2;{};{};{}m{} \033[38;2;255;255;255m".format(r, g, b, text)
-
-
-def sound():
-    winsound.PlaySound('alert.wav', winsound.SND_FILENAME)
-
-
-def colorText(text):
-    for color in COLORS:
-        text = text.replace("[[" + color + "]]", COLORS[color])
-    return text
-
 
 f = open("BY GLN.txt", "r")
 asci = "".join(f.readlines())
@@ -79,32 +122,12 @@ twelve = "This is the syntax for the linking of the library. Here * represents t
          "We have to run the command Link after the linking of your library is done. "
 
 
-def speak(audio) -> object:
-    engine.say(audio)
-    engine.runAndWait()
 
-
-def talk(audio) -> object:
-    print("-->>\t\t" + audio)
-    engine.say(audio)
-    engine.runAndWait()
-
-
-def greetMe():
-    CurrentHour = int(datetime.datetime.now().hour)
-    if 0 <= CurrentHour < 12:
-        talk('Good Morning!')
-
-    elif 12 <= CurrentHour < 18:
-        talk('Good Afternoon!')
-
-    elif CurrentHour >= 18 and CurrentHour != 0:
-        talk('Good Evening!')
 
 
 greetMe()
 talk('hai, i am bot, and my name is sta.')
-print('i am updatable, to update me press "update_me" in the command  ')
+print(ct("\t\t<>magenta to update me enter command  'update_me'<>\n"))
 talk('For better view, please maximise the window.')
 talk('enter the command, which you want to know.')
 talk('for example, to see, the list of commands, enter the command as shown below. ')
@@ -147,11 +170,8 @@ if __name__ == '__main__':
             talk(twelve)
         elif 'target_library' in query:
             talk(eight)
-        elif 'update_me' in query:
-            update()
-            talk('please wait a minuit wile getting updating ')
+
         else:
             print("\t\t\t\t\t" + sorry)
             sound()
             speak('sorry, there is no such command')
-
