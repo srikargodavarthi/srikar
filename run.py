@@ -67,7 +67,7 @@ def colorText(text):
     for color in COLORS:
         text = text.replace("[[" + color + "]]", COLORS[color])
     return text
-print(' I NEED INTERNET')
+
 check_update()
 ct = ColourText()
 ct.initTerminal()
