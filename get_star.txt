@@ -1,0 +1,8 @@
+[[green]]
+            get_cells                             get_clocks                              get_designs         get_libs
+
+
+           get_lib_cells <libname/cellname>       get_lib_pins <libname/cellname/pinname>
+
+           get_nets                              get_pins <cell/pin>                      get_ports"
+[[white]]
