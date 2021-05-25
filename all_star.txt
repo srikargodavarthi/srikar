@@ -1,5 +1,5 @@
 [[green]]
-              all_inputs           all_outputs         all_clocks             all_registers\n\n"\
+              all_inputs           all_outputs         all_clocks             all_registers
 
               all_ideal_nets       all_fanin           all_fanout
 [[white]]
