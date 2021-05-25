@@ -1,0 +1,10 @@
+[[green]]
+
+       add_to_collection         compare collections            copy_collection         filter_collection
+
+
+       foreach_in_collection     index_collection	            remove_from_collection
+
+
+       sizeof_collection            sort_collection
+[[white]]
